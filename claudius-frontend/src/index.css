@@ -1,0 +1,112 @@
+@import 'tailwindcss';
+
+/* M3: design tokens live in @theme so Tailwind generates first-class utilities
+   (bg-bg, text-muted, border-border, bg-user-bubble, …) instead of every
+   component spelling them as text-[color:var(--muted)]. Overriding the vars in
+   the dark media query re-tints every utility at once. */
+@theme {
+  --color-bg: #ffffff;
+  --color-text: #1a1a1a;
+  --color-muted: #6b7280;
+  --color-user-bubble: #e8f0fe;
+  --color-assist-bubble: #f3f4f6;
+  --color-border: #e5e7eb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0d1117;
+    --color-text: #e6edf3;
+    --color-muted: #8b949e;
+    --color-user-bubble: #1f2c3d;
+    --color-assist-bubble: #161b22;
+    --color-border: #30363d;
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  line-height: 1.5;
+}
+
+/* Markdown inside an assistant reply. */
+.msg__body > :first-child {
+  margin-top: 0;
+}
+.msg__body > :last-child {
+  margin-bottom: 0;
+}
+.msg__body p {
+  margin: 0.5em 0;
+}
+.msg__body h1,
+.msg__body h2,
+.msg__body h3 {
+  margin: 0.75em 0 0.4em;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.msg__body h1 {
+  font-size: 1.2em;
+}
+.msg__body h2 {
+  font-size: 1.1em;
+}
+.msg__body h3 {
+  font-size: 1em;
+}
+.msg__body ul,
+.msg__body ol {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+.msg__body ul {
+  list-style: disc;
+}
+.msg__body ol {
+  list-style: decimal;
+}
+.msg__body code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: var(--color-border);
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+}
+.msg__body pre {
+  margin: 0.5em 0;
+  padding: 0.6em 0.8em;
+  overflow-x: auto;
+  background: var(--color-border);
+  border-radius: 6px;
+}
+.msg__body pre code {
+  padding: 0;
+  background: none;
+}
+.msg__body table {
+  border-collapse: collapse;
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.msg__body th,
+.msg__body td {
+  border: 1px solid var(--color-border);
+  padding: 0.25em 0.5em;
+}
+.msg__body a {
+  text-decoration: underline;
+}

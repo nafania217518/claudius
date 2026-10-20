@@ -1,0 +1,35 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "backend",
+      "runtimeExecutable": "./start_backend.sh",
+      "runtimeArgs": [],
+      "port": 8080
+    },
+    {
+      "name": "backend-nosandbox",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "SPRING_APPLICATION_JSON='{\"claudius\":{\"bash\":{\"sandbox\":\"none\"}}}' ./start_backend.sh"],
+      "port": 8080
+    },
+    {
+      "name": "backend-nosandbox-8081",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "SERVER_PORT=8081 SPRING_APPLICATION_JSON='{\"claudius\":{\"bash\":{\"sandbox\":\"none\"}}}' ./start_backend.sh"],
+      "port": 8081
+    },
+    {
+      "name": "frontend-8081",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "CLAUDIUS_API=http://localhost:8081 ./start_frontend.sh"],
+      "port": 5173
+    },
+    {
+      "name": "frontend",
+      "runtimeExecutable": "./start_frontend.sh",
+      "runtimeArgs": [],
+      "port": 5173
+    }
+  ]
+}

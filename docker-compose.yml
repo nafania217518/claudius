@@ -1,0 +1,24 @@
+# Local run: backend + frontend in one container on http://localhost:8080.
+#   docker compose up --build
+# Ollama runs on the host (`ollama serve`); pull the model first (`ollama pull <model>`).
+services:
+  claudius:
+    build: .
+    image: claudius
+    ports:
+      - "8080:8080"
+    # These seed the first provider on an empty data volume only. After that, providers
+    # and models are managed in the UI (Settings) and live in the claudius data dir.
+    environment:
+      SPRING_AI_OLLAMA_BASE_URL: http://host.docker.internal:11434
+      SPRING_AI_OLLAMA_CHAT_MODEL: ${CLAUDIUS_MODEL:-qwen3.8:27b-mlx}
+    # Docker Desktop resolves host.docker.internal itself; Linux needs this mapping.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      # Workspaces + claudius data (registry, session DBs) survive `docker compose down`.
+      # `docker compose down -v` deletes them.
+      - claudius-data:/data/workspaces
+
+volumes:
+  claudius-data:

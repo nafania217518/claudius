@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(echo \"===claudius dir===\" && ls -la && echo \"===any REFERENCE-IMPLEMENTATION files anywhere in claude-projects===\" && find /Users/oleksiiyakovenko/claude-projects -iname 'REFERENCE-IMPLEMENTATION*' 2>/dev/null && echo \"===.claude dir in claudius===\" && ls -la .claude 2>/dev/null && echo \"===any *.md in claudius===\" && find . -name '*.md' 2>/dev/null)",
+      "Bash(xargs -n1 basename)",
+      "Bash(grep -nE \"export \\(async \\)?function|expand|\\\\$\\\\{\" envExpansion.ts)",
+      "Bash(npm install *)",
+      "Bash(npm test *)",
+      "Bash(npm run *)",
+      "Bash(npx vitest *)",
+      "Bash(grep -oE '[a-z@/-]+ [a-z-]+$')",
+      "Bash(grep -oE '  \\(error|warning\\)  .*  [a-z@/-]+$')",
+      "Bash(awk '{print $NF}')",
+      "Bash(awk '/^\\\\/Users/{f=$0} /error|warning/{if\\(f\\)print f\": \"$0}')",
+      "Bash(grep -E '^\\\\S.*\\\\.\\(ts|tsx\\)$|error|warning')",
+      "Bash(grep -vE '^\\\\s*$')",
+      "Bash(echo \"lint exit=$?\")",
+      "Bash(echo \"build exit=$?\")",
+      "Read(//tmp/**)"
+    ]
+  }
+}

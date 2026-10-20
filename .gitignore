@@ -1,0 +1,19 @@
+# OS / editors
+.DS_Store
+.idea/
+*.iml
+.vscode/
+
+# Backend (Gradle / Kotlin)
+claudius-backend/build/
+claudius-backend/.gradle/
+claudius-backend/.kotlin/
+claudius-backend/HELP.md
+# Runtime data: workspaces + their SQLite history live here by default.
+claudius-backend/workspaces/
+
+# Frontend (Vite / Vitest)
+claudius-frontend/node_modules/
+claudius-frontend/dist/
+claudius-frontend/coverage/
+*.log

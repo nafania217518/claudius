@@ -1,0 +1,12 @@
+.git
+.github
+.claude
+docs
+knowledge
+claudius-backend/.gradle
+claudius-backend/.kotlin
+claudius-backend/build
+claudius-backend/workspaces
+claudius-frontend/node_modules
+claudius-frontend/dist
+claudius-frontend/coverage

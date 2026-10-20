@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: claudius-backend
+  ai:
+    # M10: seed defaults for the first provider (see ProviderRegistry); providers live in the DB.
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        # User runs `ollama pull <model>` locally; no API key needed.
+        model: qwen3.8:27b-mlx
+
+claudius:
+  # M2: workspaces live here. M8: claudius data (registry, session DBs) lives in its .claudius/.
+  # Override with CLAUDIUS_WORKSPACES_DIR.
+  workspaces-dir: ./workspaces
+  chat:
+    # M5: upper bound on model calls per user turn (each tool round-trip is one call).
+    # M13: 50, a multi-file task needs more tool rounds.
+    max-iterations: 50
+    # M9: tool calls in one model reply that need no approval (incl. sub-agents) run in parallel, up to this many.
+    max-parallel-tools: 4
+  # M8: the bash tool. sandbox: landrun (Landlock, default) | none (UNSANDBOXED, local dev only).
+  bash:
+    sandbox: landrun
+    landrun: landrun
+    timeout-seconds: 120
+  # M11: compaction. W = min(model window, workspace limit); unknown W = never automatic.
+  # A turn compacts first when ctx + max(last keep-turns turns, reserved output) > W; a long
+  # tool loop compacts mid-turn. Up to keep-turns recent turns (within W/4) stay verbatim.
+  compact:
+    keep-turns: 2
